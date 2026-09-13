@@ -18,7 +18,12 @@ const connectDB = async () => {
       throw new Error('MONGODB_URI environment variable is missing.');
     }
 
-    cached.promise = mongoose.connect(mongoUri).then((mongooseInstance) => {
+    const opts = {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    };
+
+    cached.promise = mongoose.connect(mongoUri, opts).then((mongooseInstance) => {
       console.log('MongoDB Connected successfully');
       return mongooseInstance;
     });

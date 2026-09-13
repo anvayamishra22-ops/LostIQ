@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return { success: true };
     } catch (error) {
-      const errorMsg = error.response?.data?.message || error.message || 'Login failed. Please check your credentials.';
+      const errorMsg = (typeof error.response?.data === 'string' ? error.response.data : error.response?.data?.message) || error.message || 'Login failed. Please check your credentials.';
       return { success: false, error: errorMsg };
     } finally {
       setLoading(false);
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return { success: true };
     } catch (error) {
-      const errorMsg = error.response?.data?.message || error.message || 'Registration failed. Please try again.';
+      const errorMsg = (typeof error.response?.data === 'string' ? error.response.data : error.response?.data?.message) || error.message || 'Registration failed. Please try again.';
       return { success: false, error: errorMsg };
     } finally {
       setLoading(false);
