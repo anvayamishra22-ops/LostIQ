@@ -1,6 +1,8 @@
 # LOSTIQ – Smart Lost & Found Portal
 
-LOSTIQ is a web-based **Lost and Found Management System** designed for college campuses. It allows students and staff to report lost items, list found items, search/filter listings, and file claims for belonging recovery. 
+LOSTIQ is a web-based **Lost and Found Management System** designed for college campuses. It allows students and staff to report lost items, list found items, search/filter listings, and file claims for belonging recovery.
+
+Deployed on Vercel with multi-service monorepo support. 
 
 This project is built using the **MERN (MongoDB, Express, React, Node)** stack with plain CSS styling, clean forms, and robust user authorization.
 
