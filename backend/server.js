@@ -39,7 +39,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Static folders for local uploads
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+const staticUploadsDir = process.env.VERCEL || process.env.NODE_ENV === 'production'
+  ? path.join('/tmp', 'uploads')
+  : path.join(__dirname, 'uploads');
+
+app.use('/uploads', express.static(staticUploadsDir));
 
 // Health Check Route
 app.get('/api/health', (req, res) => {

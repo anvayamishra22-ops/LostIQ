@@ -12,10 +12,17 @@ if (hasCloudinary) {
   storage = cloudinaryStorage;
   console.log('Multer: Configured with Cloudinary storage.');
 } else {
-  // Local fallback setup
-  const uploadDir = './uploads';
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
+  // Local fallback setup - use /tmp/uploads in serverless or ./uploads locally
+  const uploadDir = process.env.VERCEL || process.env.NODE_ENV === 'production'
+    ? path.join('/tmp', 'uploads')
+    : path.join(process.cwd(), 'uploads');
+
+  try {
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+  } catch (err) {
+    console.warn('Could not create upload directory:', err.message);
   }
 
   storage = multer.diskStorage({
