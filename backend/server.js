@@ -14,10 +14,18 @@ import adminRoutes from './routes/adminRoutes.js';
 // Load environment variables
 dotenv.config();
 
-// Connect to Database
-connectDB();
-
 const app = express();
+
+// Database connection middleware for serverless
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('Database Connection Error:', err.message);
+    res.status(500).json({ message: `Database error: ${err.message}` });
+  }
+});
 
 // Body Parser Middleware
 app.use(express.json());
