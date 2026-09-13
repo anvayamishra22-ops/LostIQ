@@ -79,10 +79,8 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-  app.listen(PORT, () => {
-    console.log(`LOSTIQ Backend running on port ${PORT}`);
-  });
-}
+app.listen(PORT, () => {
+  console.log(`LOSTIQ Backend listening on port ${PORT}`);
+});
 
 export default app;
